@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+if [ -z $TODO_DIR ]; then
+    echo "Please run setup script"
+else
+    case $1 in
+
+    "")
+        find $TODO_DIR -type f -exec cat {} \;
+        ;;
+    "rm")
+        rm $TODO_DIR/$2
+        ;;
+    "ls")
+        ls $TODO_DIR
+        ;;
+    "ed")
+        $EDITOR $TODO_DIR/$2
+        ;;
+    *)
+        echo """
+todo() usage:
+todo
+        print todo list
+todo ls
+        list todo files
+todo ed <file>
+        edit todo list file
+todo rm <file>
+        remove todo list file
+todo help
+        print this usage
+            """
+        ;;
+    esac
+fi
