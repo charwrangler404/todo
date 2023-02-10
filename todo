@@ -26,9 +26,10 @@ else
             $EDITOR $TODO_DIR/$TODO_DEFAULT
         elif [ ! -f $TODO_DIR/$2 ]; then
             echo "# $2" > $TODO_DIR/$2
-	else
             $EDITOR $TODO_DIR/$2
-	fi
+	    else
+            $EDITOR $TODO_DIR/$2
+	    fi
         ;;
     "add")
         if [ ! -f "$TODO_DIR/$TODO_DEFAULT" ]; then
@@ -43,8 +44,8 @@ todo
         print todo list
 todo ls
         list todo files
-todo ed <file>
-        add or edit todo list file
+todo ed [file]
+        edit specified or default todo list
 todo rm <file>
         remove todo list file
 todo add 'message'
