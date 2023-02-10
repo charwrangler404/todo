@@ -17,14 +17,14 @@ else
         ls $TODO_DIR
         ;;
     "ed")
-        if [ -z $2 -a ! -f "$TODO_DIR/$TODO_DEFAULT" ]; then
+        if [ -z "$2" -a ! -f "$TODO_DIR/$TODO_DEFAULT" ]; then
             TODO_DEFAULT=$(date +%Y.%m.%d.md)
             echo "% $TODO_DEFAULT" > $TODO_DIR/$TODO_DEFAULT
             $EDITOR $TODO_DIR/$TODO_DEFAULT
 	        exit
-        elif [ -z $2 ]; then
+        elif [ -z "$2" ]; then
             $EDITOR $TODO_DIR/$TODO_DEFAULT
-        elif [ ! -f $TODO_DIR/$2 ]; then
+        elif [ ! -f "$TODO_DIR/$2" ]; then
             echo "# $2" > $TODO_DIR/$2
             $EDITOR $TODO_DIR/$2
 	    else
