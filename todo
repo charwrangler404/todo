@@ -21,8 +21,8 @@ edit () {
             ;;
         *)
             echo "Editor not supported. If you would like to use your
-            favorite editor, please consider submitting a pull request
-            adding it"
+            favorite editor, please consider submitting an issue on  
+            github."
             exit
     esac
 }
