@@ -2,6 +2,31 @@
 
 TODO_DEFAULT=$(date +%Y.%m.%d.md)
 
+edit () {
+    case $EDITOR in 
+        "vi")
+            vi $1
+            ;;
+        "vim")
+            vim $1
+            ;;
+        "nvim")
+            nvim $1
+            ;;
+        "emacs")
+            emacs $1
+            ;;
+        "nano" )
+            nano $1
+            ;;
+        *)
+            echo "Editor not supported. If you would like to use your
+            favorite editor, please consider submitting a pull request
+            adding it"
+            exit
+    esac
+}
+
 if [ -z $TODO_DIR ]; then
     echo "Please run setup script"
 else
@@ -20,15 +45,15 @@ else
         if [ -z "$2" -a ! -f "$TODO_DIR/$TODO_DEFAULT" ]; then
             TODO_DEFAULT=$(date +%Y.%m.%d.md)
             echo "% $TODO_DEFAULT" > $TODO_DIR/$TODO_DEFAULT
-            $EDITOR $TODO_DIR/$TODO_DEFAULT
+            edit $TODO_DIR/$TODO_DEFAULT
 	        exit
         elif [ -z "$2" ]; then
-            $EDITOR $TODO_DIR/$TODO_DEFAULT
+            edit $TODO_DIR/$TODO_DEFAULT
         elif [ ! -f "$TODO_DIR/$2" ]; then
             echo "# $2" > $TODO_DIR/$2
-            $EDITOR $TODO_DIR/$2
+            edit $TODO_DIR/$2
 	    else
-            $EDITOR $TODO_DIR/$2
+            edit $TODO_DIR/$2
 	    fi
         ;;
     "add")
