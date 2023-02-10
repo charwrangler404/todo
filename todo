@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+TODO_DEFAULT=$(date +%Y.%m.%d.md)
+
 if [ -z $TODO_DIR ]; then
     echo "Please run setup script"
 else
@@ -15,7 +17,24 @@ else
         ls $TODO_DIR
         ;;
     "ed")
-        $EDITOR $TODO_DIR/$2
+        if [ -z $2 -a ! -f "$TODO_DIR/$TODO_DEFAULT" ]; then
+            TODO_DEFAULT=$(date +%Y.%m.%d.md)
+            echo "% $TODO_DEFAULT" > $TODO_DIR/$TODO_DEFAULT
+            $EDITOR $TODO_DIR/$TODO_DEFAULT
+	        exit
+        elif [ -z $2 ]; then
+            $EDITOR $TODO_DIR/$TODO_DEFAULT
+        elif [ ! -f $TODO_DIR/$2 ]; then
+            echo "# $2" > $TODO_DIR/$2
+	else
+            $EDITOR $TODO_DIR/$2
+	fi
+        ;;
+    "add")
+        if [ ! -f "$TODO_DIR/$TODO_DEFAULT" ]; then
+            echo "% $TODO_DEFAULT" > $TODO_DIR/$TODO_DEFAULT
+        fi
+        echo """$2""" >> $TODO_DIR/$TODO_DEFAULT
         ;;
     *)
         echo """
@@ -25,9 +44,11 @@ todo
 todo ls
         list todo files
 todo ed <file>
-        edit todo list file
+        add or edit todo list file
 todo rm <file>
         remove todo list file
+todo add 'message'
+        add message to default todo list
 todo help
         print this usage
             """
