@@ -3,6 +3,7 @@
 This is a small script to manage your todo list.
 
 Usage:
+
     todo
         print your todo lists
     todo ls
@@ -11,6 +12,8 @@ Usage:
         remove a file from your todo list
     todo ed <file>
         edit a file or create a new one
+    todo add "item"
+        add an item to the default todo list
 
 To install:
 
