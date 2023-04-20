@@ -10,7 +10,7 @@ Usage:
         list your todo list files
     todo rm <file>
         remove a file from your todo list
-    todo ed <file>
+    todo ed [file]
         edit a file or create a new one
     todo add "item"
         add an item to the default todo list
