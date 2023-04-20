@@ -20,9 +20,8 @@ edit () {
             nano $1
             ;;
         *)
-            echo "Editor not supported. If you would like to use your
-            favorite editor, please consider submitting a pull request
-            adding it"
+            echo "Editor '$EDITOR' not supported. If you would like to use your
+            favorite editor, please consider submitting an issue on github."
             exit
     esac
 }
@@ -31,7 +30,6 @@ if [ -z $TODO_DIR ]; then
     echo "Please run setup script"
 else
     case $1 in
-
     "")
         find $TODO_DIR -type f -exec cat {} \;
         ;;
@@ -43,7 +41,6 @@ else
         ;;
     "ed")
         if [ -z "$2" -a ! -f "$TODO_DIR/$TODO_DEFAULT" ]; then
-            TODO_DEFAULT=$(date +%Y.%m.%d.md)
             echo "% $TODO_DEFAULT" > $TODO_DIR/$TODO_DEFAULT
             edit $TODO_DIR/$TODO_DEFAULT
 	        exit
